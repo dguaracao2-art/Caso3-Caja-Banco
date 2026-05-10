@@ -1,23 +1,44 @@
 from modelo.persona import Persona
-def ejecutar_simulacion():
-    cola_banco = [] 
-    print("--- LLEGADA DE CLIENTES ---")
-    clientes = ["Gabriel Leyton", "Bryan Chimbo", "Danny Guaraca"]
-    
-    objetos_persona = []
-    for nombre in clientes:
-        p = Persona(nombre)
-        objetos_persona.append(p)
-        print(f">> Turno #{p.turno} - {p.nombre} toma un turno y espera.")
-        
-        cola_banco.append(p) 
+from caja_banco import CajaBanco
 
-    print("\n" + "."*3)
-    print("--- ATENCIÓN EN CAJA ---")
 
-    while len(cola_banco) > 0:
-        atendido = cola_banco.pop(0)
-        print(f"[CAJERO] Turno #{atendido.turno} - {atendido.nombre} ha sido atendida.")
+def main():
+    caja = CajaBanco()
 
-if __name__ == "__main__":
-    ejecutar_simulacion()
+    nombres = [
+        "Pedro Loor",
+        "Carmen Intriago",
+        "Jorge Menéndez",
+        "Valeria Cedeño",
+        "Roberto Anchundia",
+    ]
+
+    print("=" * 40)
+    print(" Banco del Pacífico — Caja #1")
+    print("=" * 40)
+
+    print("\nClientes llegando a la fila:\n")
+    for nombre in nombres:
+        persona = Persona(nombre)
+        caja.agregar_persona(persona)
+        print(f"  >> {persona} toma un turno y espera.")
+
+    print("\nCajero listo. Iniciando atención...\n")
+    while not caja.esta_vacia():
+        persona = caja.atender()
+        print(f"  [CAJERO] {persona} ha sido atendida.")
+
+    print("\nTodos los clientes han sido atendidos.")
+
+
+main()
+
+caja = CajaBanco()
+caja.agregar_persona(Persona("Pedro Loor"))
+caja.agregar_persona(Persona("Carmen Intriago"))
+caja.agregar_persona(Persona("Jorge Menéndez"))
+
+resultado = caja.persona_abandona("Carmen Intriago")
+print(resultado)
+persona = caja.atender()
+print(persona.nombre) 

@@ -1,18 +1,16 @@
 class Persona:
-    _contador_turnos = 1 
+
+    contador_turnos = 0
 
     def __init__(self, nombre):
         self._nombre = nombre
-        self._turno = Persona._contador_turnos
-        Persona._contador_turnos += 1 
+
+        Persona.contador_turnos += 1
+        self.turno = Persona.contador_turnos
 
     @property
     def nombre(self):
         return self._nombre
 
-    @property
-    def turno(self):
-        return self._turno
-
     def __str__(self):
-        return f"Turno #{self._turno} - {self._nombre}"
+        return f"Turno #{self.turno} - {self._nombre}"
