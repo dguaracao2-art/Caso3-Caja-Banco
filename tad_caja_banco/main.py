@@ -3,7 +3,6 @@ import time
 
 def ejecutar_banco():
     caja = Cola()
-    # Lista de clientes manual para no usar Faker
     clientes_entrantes = ["Juan Perez", "Maria Garcia", "Carlos Lopez", "Ana Martinez"]
 
     print("---INICIO DE JORNADA BANCARIA---")
@@ -23,10 +22,10 @@ def ejecutar_banco():
     while not caja.esta_vacia():
         cliente_siendo_atendido = caja.desencolar()
         print(f"✅ Atendiendo a {cliente_siendo_atendido}...")
-        time.sleep(1) # Simulación de tiempo de trámite
+        time.sleep(1) 
         print(f"[Transacción completada]")
 
     print("\n---COLA VACÍA: Fin de la atención---")
 
 if __name__ == "__main__":
-    ejecutar_banco()
+ejecutar_banco()
