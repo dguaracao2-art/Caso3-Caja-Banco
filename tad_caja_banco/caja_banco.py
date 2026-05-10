@@ -2,21 +2,26 @@ from modelo.cola import Cola
 
 class CajaBanco:
     def __init__(self):
-        self._cola = Cola()
+        self._fila = Cola()
 
-    def registrar_llegada(self, persona):
-        self._cola.push(persona)
+    def registrar_cliente(self, persona):
+        self._fila.push(persona)
 
-    def atender_cliente(self):
-        return self._cola.pop()
+    def atender_siguiente(self):
+        return self._fila.pop()
 
-    def cliente_abandona(self, nombre_cliente):
-        # Filtramos la lista: dejamos a todos menos al que se va (Requerimiento 2)
-        nueva_fila = []
-        for p in self._cola.items:
-            if p.nombre != nombre_cliente:
-                nueva_fila.append(p)
+    def cliente_abandona(self, nombre_buscar):
+        # Filtramos la lista interna para sacar a la persona
+        lista_temporal = []
+        encontrado = False
+
+        for p in self._fila.items:
+            if p.nombre != nombre_buscar:
+                lista_temporal.append(p)
             else:
-                print(f"❌ {nombre_cliente} abandonó la fila.")
+                encontrado = True
+                print(f"🏃 {nombre_buscar} se cansó de esperar y salió de la fila.")
         
-        self._cola.items = nueva_fila
+        # Actualizamos la fila con los que se quedaron
+        self._fila.items = lista_temporal
+        return encontrado

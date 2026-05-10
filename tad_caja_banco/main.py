@@ -1,36 +1,24 @@
-# main.py
-
 from modelo.persona import Persona
-from caja_banco import CajaBanco
+from tad_caja_banco.caja_banco import CajaBanco
 
+def iniciar():
+    banco = CajaBanco()
 
-def main():
-    caja = CajaBanco()
+    print("--- 🏦 BIENVENIDO AL BANCO ---")
+    
+    # REQUERIMIENTO 1: Registramos personas (Los turnos se generan solos)
+    banco.registrar_cliente(Persona("Juan Perez"))
+    banco.registrar_cliente(Persona("Maria Garcia"))
+    banco.registrar_cliente(Persona("Carlos Lopez"))
 
-    nombres = [
-        "Pedro Loor",
-        "Carmen Intriago",
-        "Jorge Menéndez",
-        "Valeria Cedeño",
-        "Roberto Anchundia",
-    ]
+    # REQUERIMIENTO 2: Alguien decide irse
+    banco.cliente_abandona("Maria Garcia")
 
-    print("=" * 40)
-    print(" Banco del Pacífico — Caja #1")
-    print("=" * 40)
+    # ATENCIÓN EN CAJA
+    print("\n--- ATENCIÓN EN VENTANILLA ---")
+    while not banco._fila.isEmpty():
+        cliente = banco.atender_siguiente()
+        print(f"✅ Atendiendo a: {cliente}")
 
-    print("\nClientes llegando a la fila:\n")
-    for nombre in nombres:
-        persona = Persona(nombre)
-        caja.agregar_persona(persona)
-        print(f"  >> {persona.nombre} toma un turno y espera.")
-
-    print("\nCajero listo. Iniciando atención...\n")
-    while not caja.esta_vacia():
-        persona = caja.atender()
-        print(f"  [CAJERO] La persona {persona.nombre} ha sido atendida.")
-
-    print("\nTodos los clientes han sido atendidos.")
-
-
-main()
+if __name__ == "__main__":
+    iniciar()
