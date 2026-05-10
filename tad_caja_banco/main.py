@@ -11,7 +11,7 @@ def ejecutar_banco():
     print("\n>>> REGISTRANDO LLEGADA DE CLIENTES:")
     for nombre in clientes_entrantes:
         caja.encolar(nombre)
-        print(f"📥 Cliente en fila: {nombre}")
+        print(f"Cliente en fila: {nombre}")
         time.sleep(0.5)
 
     print(f"\nEstado actual: {len(caja.items)} personas esperando.")
@@ -21,7 +21,7 @@ def ejecutar_banco():
     print("\n>>> ATENDIENDO EN VENTANILLA:")
     while not caja.esta_vacia():
         cliente_siendo_atendido = caja.desencolar()
-        print(f"✅ Atendiendo a {cliente_siendo_atendido}...")
+        print(f"Atendiendo a {cliente_siendo_atendido}...")
         time.sleep(1) 
         print(f"[Transacción completada]")
 
