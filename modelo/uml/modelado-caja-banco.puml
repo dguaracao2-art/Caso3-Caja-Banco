@@ -1,0 +1,33 @@
+@startuml Diagrama_Clases_Caja_Banco
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class Persona {
+    - _nombre : str
+    --
+    + nombre : str
+    + __str__() : str
+}
+
+class Cola {
+    - _elementos : list
+    --
+    + push(elemento: Object) : None
+    + pop() : Object
+    + isEmpty() : bool
+    + size() : int
+}
+
+class CajaBanco {
+    - _cola : Cola
+    --
+    + agregar_persona(persona: Persona) : None
+    + atender() : Persona
+    + esta_vacia() : bool
+}
+
+CajaBanco *-- Cola : tiene >
+Cola ..> Persona : contiene
+
+@enduml
