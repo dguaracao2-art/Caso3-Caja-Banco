@@ -1,24 +1,23 @@
 from modelo.persona import Persona
-from tad_caja_banco.caja_banco import CajaBanco
-
-def iniciar():
-    banco = CajaBanco()
-
-    print("--- 🏦 BIENVENIDO AL BANCO ---")
+def ejecutar_simulacion():
+    cola_banco = [] 
+    print("--- LLEGADA DE CLIENTES ---")
+    clientes = ["Pedro Loor", "Carmen Intriago", "Jorge Menéndez"]
     
-    # REQUERIMIENTO 1: Registramos personas (Los turnos se generan solos)
-    banco.registrar_cliente(Persona("Juan Perez"))
-    banco.registrar_cliente(Persona("Maria Garcia"))
-    banco.registrar_cliente(Persona("Carlos Lopez"))
+    objetos_persona = []
+    for nombre in clientes:
+        p = Persona(nombre)
+        objetos_persona.append(p)
+        print(f">> Turno #{p.turno} - {p.nombre} toma un turno y espera.")
+        
+        cola_banco.append(p) 
 
-    # REQUERIMIENTO 2: Alguien decide irse
-    banco.cliente_abandona("Maria Garcia")
+    print("\n" + "."*3)
+    print("--- ATENCIÓN EN CAJA ---")
 
-    # ATENCIÓN EN CAJA
-    print("\n--- ATENCIÓN EN VENTANILLA ---")
-    while not banco._fila.isEmpty():
-        cliente = banco.atender_siguiente()
-        print(f"✅ Atendiendo a: {cliente}")
+    while len(cola_banco) > 0:
+        atendido = cola_banco.pop(0)
+        print(f"[CAJERO] Turno #{atendido.turno} - {atendido.nombre} ha sido atendida.")
 
 if __name__ == "__main__":
-    iniciar()
+    ejecutar_simulacion()
