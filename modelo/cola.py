@@ -1,15 +1,21 @@
 class Cola:
-
     def __init__(self):
-        self._elementos = []
+        self.items = []
 
-    def push(self, elemento):
-        self._elementos.append(elemento)
+    def esta_vacia(self):
+        return len(self.items) == 0
 
-    def pop(self):
-        if self.isEmpty():
+    def encolar(self, item):
+        """Requerimiento 1: Agregar al final"""
+        self.items.append(item)
+
+    def desencolar(self):
+        """Requerimiento 2: Atender al primero"""
+        if self.esta_vacia():
             return None
-        return self._elementos.pop(0)
+        return self.items.pop(0)
 
-    def isEmpty(self):
-        return len(self._elementos) == 0
+    def primero(self):
+        if self.esta_vacia():
+            return None
+        return self.items[0]

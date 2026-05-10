@@ -1,34 +1,32 @@
-from modelo.persona import Persona
-from caja_banco import CajaBanco
+from modelo.cola import Cola
+import time
+
+def ejecutar_banco():
+    caja = Cola()
+    # Lista de clientes manual para no usar Faker
+    clientes_entrantes = ["Juan Perez", "Maria Garcia", "Carlos Lopez", "Ana Martinez"]
+
+    print("---INICIO DE JORNADA BANCARIA---")
+
+   
+    print("\n>>> REGISTRANDO LLEGADA DE CLIENTES:")
+    for nombre in clientes_entrantes:
+        caja.encolar(nombre)
+        print(f"📥 Cliente en fila: {nombre}")
+        time.sleep(0.5)
+
+    print(f"\nEstado actual: {len(caja.items)} personas esperando.")
+    print(f"Siguiente ticket para: {caja.primero()}")
 
 
-def main():
-    caja = CajaBanco()
-
-    nombres = [
-        "Pedro Loor",
-        "Carmen Intriago",
-        "Jorge Menéndez",
-        "Valeria Cedeño",
-        "Roberto Anchundia",
-    ]
-
-    print("=" * 40)
-    print(" Banco del Pacífico — Caja #1")
-    print("=" * 40)
-
-    print("\nClientes llegando a la fila:\n")
-    for nombre in nombres:
-        persona = Persona(nombre)
-        caja.agregar_persona(persona)
-        print(f"  >> {persona.nombre} toma un turno y espera.")
-
-    print("\nCajero listo. Iniciando atención...\n")
+    print("\n>>> ATENDIENDO EN VENTANILLA:")
     while not caja.esta_vacia():
-        persona = caja.atender()
-        print(f"  [CAJERO] La persona {persona.nombre} ha sido atendida.")
+        cliente_siendo_atendido = caja.desencolar()
+        print(f"✅ Atendiendo a {cliente_siendo_atendido}...")
+        time.sleep(1) # Simulación de tiempo de trámite
+        print(f"[Transacción completada]")
 
-    print("\nTodos los clientes han sido atendidos.")
+    print("\n---COLA VACÍA: Fin de la atención---")
 
-
-main()
+if __name__ == "__main__":
+    ejecutar_banco()
