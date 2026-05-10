@@ -1,5 +1,3 @@
-# modelo/persona.py
-
 class Persona:
 
     def __init__(self, nombre):
