@@ -1,18 +1,36 @@
-# caja_banco.py
+# main.py
 
-from modelo.cola import Cola
+from modelo.persona import Persona
+from caja_banco import CajaBanco
 
 
-class CajaBanco:
+def main():
+    caja = CajaBanco()
 
-    def __init__(self):
-        self._cola = Cola()
+    nombres = [
+        "Pedro Loor",
+        "Carmen Intriago",
+        "Jorge Menéndez",
+        "Valeria Cedeño",
+        "Roberto Anchundia",
+    ]
 
-    def agregar_persona(self, persona):
-        self._cola.push(persona)
+    print("=" * 40)
+    print(" Banco del Pacífico — Caja #1")
+    print("=" * 40)
 
-    def atender(self):
-        return self._cola.pop()
+    print("\nClientes llegando a la fila:\n")
+    for nombre in nombres:
+        persona = Persona(nombre)
+        caja.agregar_persona(persona)
+        print(f"  >> {persona.nombre} toma un turno y espera.")
 
-    def esta_vacia(self):
-        return self._cola.isEmpty()
+    print("\nCajero listo. Iniciando atención...\n")
+    while not caja.esta_vacia():
+        persona = caja.atender()
+        print(f"  [CAJERO] La persona {persona.nombre} ha sido atendida.")
+
+    print("\nTodos los clientes han sido atendidos.")
+
+
+main()
