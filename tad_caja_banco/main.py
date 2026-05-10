@@ -2,7 +2,7 @@ from modelo.persona import Persona
 def ejecutar_simulacion():
     cola_banco = [] 
     print("--- LLEGADA DE CLIENTES ---")
-    clientes = ["Pedro Loor", "Carmen Intriago", "Jorge Menéndez"]
+    clientes = ["Gabriel Leyton", "Bryan Chimbo", "Danny Guaraca"]
     
     objetos_persona = []
     for nombre in clientes:
